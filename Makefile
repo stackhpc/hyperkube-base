@@ -1,7 +1,7 @@
 ARCH ?=amd64
 ALL_ARCH = amd64 arm64
 
-IMAGE ?= docker.io/oats87/hyperkube-base
+IMAGE ?= harbor.cumulus.openstack.hpc.cam.ac.uk/magnum/hyperkube-base
 TAG ?= v0.0.1
 
 BASEIMAGE ?= ubuntu:20.04
@@ -48,7 +48,7 @@ build: clean cni-bin/bin scripts/iptables-wrapper-installer.sh
 	docker build --pull --build-arg ARCH=${ARCH} -t $(IMAGE):$(TAG)-linux-$(ARCH) .
 
 push: build
-	docker push $(IMAGE):$(TAG)-$(ARCH)
+	docker push $(IMAGE):$(TAG)-linux-$(ARCH)
 
 .PHONY: all build push clean all-build all-push-images all-push
 
