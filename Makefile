@@ -44,7 +44,9 @@ clean:
 	rm -rf cni-bin/
 	rm -f scripts/iptables-wrapper-installer.sh
 
-build: clean cni-bin/bin scripts/iptables-wrapper-installer.sh
+prepare: cni-bin/bin scripts/iptables-wrapper-installer.sh
+
+build: clean prepare
 	docker build --pull --build-arg ARCH=${ARCH} -t $(IMAGE):$(TAG)-linux-$(ARCH) .
 
 push: build
